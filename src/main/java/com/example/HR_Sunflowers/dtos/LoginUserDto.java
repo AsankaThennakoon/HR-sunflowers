@@ -11,10 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LoginUserDto {
 
-    private String firstName;
     private String email;
     private String password;
-    private String token;
+
+
+
 
 
 }

@@ -24,8 +24,8 @@ public class AuthenticationService {
 
     public User signup(RegisterUserDto input) {
         var user = User.builder()
-                .firstName(input.getFirstName())
-                .lastName(input.getEmail())
+                .userName(input.getUserName())
+                .email(input.getEmail())
                 .password(passwordEncoder.encode(input.getPassword()))
                 .build();
 
@@ -39,6 +39,7 @@ public class AuthenticationService {
                 new UsernamePasswordAuthenticationToken(
                         input.getEmail(),
                         input.getPassword()
+
                 )
         );
         var user=userRepository.findByEmail(input.getEmail()).orElseThrow();
