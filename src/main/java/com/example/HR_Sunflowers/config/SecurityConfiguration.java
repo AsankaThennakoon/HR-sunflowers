@@ -24,16 +24,14 @@ public class SecurityConfiguration {
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 // Disable CSRF (Cross-Site Request Forgery)
                 .csrf(csrf -> csrf.disable())
 
-                // Configure CORS
-                .cors(Customizer.withDefaults())
+                // Enable CORS and use the custom CORS configuration
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
                 // Configure session management to stateless
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -58,9 +56,10 @@ public class SecurityConfiguration {
         CorsConfiguration configuration = new CorsConfiguration();
 
         // Configure allowed origins, methods, and headers
-        configuration.setAllowedOrigins(List.of("http://localhost:8005"));
-        configuration.setAllowedMethods(List.of("GET", "POST"));
+        configuration.setAllowedOrigins(List.of("http://localhost:5174"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        configuration.setAllowCredentials(true); // Allow credentials to be included in the request
 
         // Register the configuration
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
