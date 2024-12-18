@@ -1,6 +1,6 @@
 package com.example.HR_Sunflowers.config;
 
-import com.example.HR_Sunflowers.repositories.UserRepository;
+import com.example.HR_Sunflowers.auth.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

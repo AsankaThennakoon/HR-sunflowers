@@ -1,6 +1,6 @@
-package com.example.HR_Sunflowers.controller;
-import com.example.HR_Sunflowers.entity.User;
-import com.example.HR_Sunflowers.services.UserService;
+package com.example.HR_Sunflowers.auth.controller;
+import com.example.HR_Sunflowers.auth.entity.User;
+import com.example.HR_Sunflowers.auth.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

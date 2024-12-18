@@ -1,11 +1,11 @@
-package com.example.HR_Sunflowers.controller;
+package com.example.HR_Sunflowers.auth.controller;
 
-import com.example.HR_Sunflowers.dtos.LoginUserDto;
-import com.example.HR_Sunflowers.dtos.RegisterUserDto;
-import com.example.HR_Sunflowers.entity.User;
-import com.example.HR_Sunflowers.responses.LoginResponse;
-import com.example.HR_Sunflowers.services.AuthenticationService;
-import com.example.HR_Sunflowers.services.JwtService;
+import com.example.HR_Sunflowers.auth.dtos.LoginUserDto;
+import com.example.HR_Sunflowers.auth.dtos.RegisterUserDto;
+import com.example.HR_Sunflowers.auth.entity.User;
+import com.example.HR_Sunflowers.auth.responses.LoginResponse;
+import com.example.HR_Sunflowers.auth.services.AuthenticationService;
+import com.example.HR_Sunflowers.auth.services.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

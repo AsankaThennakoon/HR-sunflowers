@@ -1,8 +1,8 @@
-package com.example.HR_Sunflowers.services;
+package com.example.HR_Sunflowers.auth.services;
 
 
-import com.example.HR_Sunflowers.entity.User;
-import com.example.HR_Sunflowers.repositories.UserRepository;
+import com.example.HR_Sunflowers.auth.entity.User;
+import com.example.HR_Sunflowers.auth.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

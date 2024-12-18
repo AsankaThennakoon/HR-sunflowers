@@ -1,4 +1,4 @@
-package com.example.HR_Sunflowers.entity;
+package com.example.HR_Sunflowers.auth.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

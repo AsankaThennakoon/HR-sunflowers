@@ -1,4 +1,4 @@
-package com.example.HR_Sunflowers.dtos;
+package com.example.HR_Sunflowers.auth.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,13 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginUserDto {
+public class RegisterUserDto {
 
+    private String userName;
     private String email;
     private String password;
-
-
-
-
 
 }

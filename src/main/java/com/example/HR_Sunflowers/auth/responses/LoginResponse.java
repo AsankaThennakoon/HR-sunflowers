@@ -1,4 +1,4 @@
-package com.example.HR_Sunflowers.responses;
+package com.example.HR_Sunflowers.auth.responses;
 
 public class LoginResponse {
     private String token;

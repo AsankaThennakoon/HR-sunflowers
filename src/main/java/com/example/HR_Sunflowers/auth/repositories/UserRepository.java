@@ -1,6 +1,6 @@
-package com.example.HR_Sunflowers.repositories;
+package com.example.HR_Sunflowers.auth.repositories;
 
-import com.example.HR_Sunflowers.entity.User;
+import com.example.HR_Sunflowers.auth.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

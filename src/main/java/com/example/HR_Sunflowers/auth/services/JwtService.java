@@ -1,4 +1,4 @@
-package com.example.HR_Sunflowers.services;
+package com.example.HR_Sunflowers.auth.services;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

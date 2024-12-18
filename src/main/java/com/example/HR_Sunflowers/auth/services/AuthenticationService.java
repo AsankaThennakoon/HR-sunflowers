@@ -1,9 +1,9 @@
-package com.example.HR_Sunflowers.services;
+package com.example.HR_Sunflowers.auth.services;
 
-import com.example.HR_Sunflowers.dtos.LoginUserDto;
-import com.example.HR_Sunflowers.dtos.RegisterUserDto;
-import com.example.HR_Sunflowers.entity.User;
-import com.example.HR_Sunflowers.repositories.UserRepository;
+import com.example.HR_Sunflowers.auth.dtos.LoginUserDto;
+import com.example.HR_Sunflowers.auth.dtos.RegisterUserDto;
+import com.example.HR_Sunflowers.auth.entity.User;
+import com.example.HR_Sunflowers.auth.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
