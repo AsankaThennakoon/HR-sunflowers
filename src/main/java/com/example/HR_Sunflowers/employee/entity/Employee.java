@@ -21,10 +21,15 @@ public class Employee {
 
     @Column(nullable = false, unique = true)  // Email is required and must be unique
     private String email;
+    @Column(nullable = false)
+    private String password;
 
     private String address;
-
     private String position;
+    private Double salary;
+    private String image;     // New field
+    @Column(name = "category_id")
+    private Integer categoryId;
 
 
 }
