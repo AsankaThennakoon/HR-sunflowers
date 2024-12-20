@@ -73,14 +73,23 @@ public class EmployeeService {
         }
     }
 
-    public ResponseEntity<String> updateEmployee(Integer id, String newName) {
+    public ResponseEntity<String> updateEmployee(Integer id, CreateEmployeeDto createEmployeeDto, String imageName) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
         if (optionalEmployee.isPresent()) {
             log.info("Employee is founded and id is " + id);
             Employee employee = optionalEmployee.get();
-            employee.setName(newName);
+            employee.setName(createEmployeeDto.getName());
+            employee.setEmail(createEmployeeDto.getEmail());
+            employee.setAddress(createEmployeeDto.getAddress());
+            employee.setPosition(createEmployeeDto.getPosition());
+            employee.setPassword(passwordEncoder.encode(createEmployeeDto.getPassword())); // Hash password
+            employee.setSalary(createEmployeeDto.getSalary());
+            employee.setImage(imageName); // Set uploaded image name
+            employee.setCategoryId(createEmployeeDto.getCategoryId());
+
+
             employeeRepository.save(employee);
-            return ResponseEntity.ok("Employee Name Successfully changed");
+            return ResponseEntity.ok("Employee Successfully updated changed");
         } else {
             return ResponseEntity.notFound().build();
 

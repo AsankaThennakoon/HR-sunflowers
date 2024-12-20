@@ -20,9 +20,10 @@ import java.util.List;
 @RequestMapping("/employee")
 
 public class EmployeeController {
-   // Injected by Spring
+    // Injected by Spring
 
     private EmployeeService employeeService;
+
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
@@ -32,7 +33,7 @@ public class EmployeeController {
 
 
     @GetMapping("/getEmployee/{id}")
-    public ResponseEntity<EmployeeGeneralDto> getEmployee(@PathVariable Integer id){
+    public ResponseEntity<EmployeeGeneralDto> getEmployee(@PathVariable Integer id) {
 
 
         return employeeService.getEmployee(id);
@@ -41,7 +42,7 @@ public class EmployeeController {
 
 
     @GetMapping("/employee")
-    public ResponseEntity<List<EmployeeGeneralDto>> getEmployees(){
+    public ResponseEntity<List<EmployeeGeneralDto>> getEmployees() {
 
         return employeeService.getEmployees();
 
@@ -84,12 +85,48 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/deleteEmployee")
-    public ResponseEntity<String> deleteEmployee(@RequestParam Integer id){
-        return  employeeService.deleteEmployee(id);
+    public ResponseEntity<String> deleteEmployee(@RequestParam Integer id) {
+        return employeeService.deleteEmployee(id);
     }
 
     @PutMapping("/updateEmployee")
-    public ResponseEntity<String> updateEmployee(@RequestParam Integer id,@RequestParam String newName){
-        return employeeService.updateEmployee(id,newName);
+    public ResponseEntity<String> updateEmployee(
+            @RequestParam Integer id,
+            @RequestPart("employee") String employeeJson,
+            @RequestPart(value = "image", required = false) MultipartFile image) {
+
+        System.out.println("Employee JSON: " + employeeJson);
+
+        try {
+            // Parse the JSON string into CreateEmployeeDto (or UpdateEmployeeDto if different structure)
+            ObjectMapper objectMapper = new ObjectMapper();
+            CreateEmployeeDto updateEmployeeDto = objectMapper.readValue(employeeJson, CreateEmployeeDto.class);
+            // If a new image is uploaded, handle the file upload
+            if (image != null && !image.isEmpty()) {
+                String fileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
+                String directoryPath = new File("src/main/resources/static/images").getAbsolutePath();
+                File directory = new File(directoryPath);
+                if (!directory.exists()) {
+                    directory.mkdirs();
+                }
+                String filePath = directoryPath + File.separator + fileName;
+                File file = new File(filePath);
+                image.transferTo(file);
+                System.out.println("Saving file to: " + filePath);
+
+                return employeeService.updateEmployee(id, updateEmployeeDto, fileName);
+                // Save the file name or path to the employee object
+
+            } else {
+                return employeeService.updateEmployee(id, updateEmployeeDto, null);
+            }
+
+
+        } catch (IOException e) {
+            System.out.println(e.toString());
+            return ResponseEntity.status(500).body("Error while updating employee");
+        }
+
+
     }
 }
