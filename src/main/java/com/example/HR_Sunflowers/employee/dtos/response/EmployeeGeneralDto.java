@@ -5,6 +5,7 @@ import lombok.Data;
 @Data //for getters and setters
 public class EmployeeGeneralDto {
 
+    private Integer id;
     private String name;
     private String email;
     private String address;

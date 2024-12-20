@@ -93,6 +93,7 @@ public class EmployeeService {
                 .map(employee -> {
                     EmployeeGeneralDto dto = new EmployeeGeneralDto();
 
+                    dto.setId(employee.getId());
                     dto.setName(employee.getName());
 
                     dto.setEmail(employee.getEmail());

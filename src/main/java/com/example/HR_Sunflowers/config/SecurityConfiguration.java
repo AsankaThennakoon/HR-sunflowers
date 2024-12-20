@@ -39,6 +39,7 @@ public class SecurityConfiguration {
                 // Configure endpoint-based authorization
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll() // Public endpoints
+                        .requestMatchers("/images/**").permitAll() // Allow access to static images
                         .anyRequest().authenticated()           // Secured endpoints
                 )
 
