@@ -129,4 +129,8 @@ public class EmployeeController {
 
 
     }
+    @GetMapping("/employee_count")
+    public Long getEmployeeCount(){
+        return employeeService.getEmployeeCount();
+    }
 }

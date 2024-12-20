@@ -82,9 +82,13 @@ public class EmployeeService {
             employee.setEmail(createEmployeeDto.getEmail());
             employee.setAddress(createEmployeeDto.getAddress());
             employee.setPosition(createEmployeeDto.getPosition());
-            employee.setPassword(passwordEncoder.encode(createEmployeeDto.getPassword())); // Hash password
+            //employee.setPassword(passwordEncoder.encode(createEmployeeDto.getPassword())); // Hash password
             employee.setSalary(createEmployeeDto.getSalary());
-            employee.setImage(imageName); // Set uploaded image name
+            if(imageName!=null){
+                employee.setImage(imageName); // Set uploaded image name
+
+            }
+
             employee.setCategoryId(createEmployeeDto.getCategoryId());
 
 
@@ -119,4 +123,7 @@ public class EmployeeService {
         return ResponseEntity.ok(employeeDtos);
     }
 
+    public Long getEmployeeCount() {
+        return employeeRepository.count();
+    }
 }
