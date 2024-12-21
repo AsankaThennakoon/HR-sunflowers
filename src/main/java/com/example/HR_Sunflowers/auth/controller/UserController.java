@@ -1,4 +1,5 @@
 package com.example.HR_Sunflowers.auth.controller;
+import com.example.HR_Sunflowers.auth.dtos.AdminGeneralDto;
 import com.example.HR_Sunflowers.auth.entity.User;
 import com.example.HR_Sunflowers.auth.services.UserService;
 import lombok.AllArgsConstructor;
@@ -25,10 +26,10 @@ public class UserController {
         return userService.getAdminCount();
     }
 
-    @GetMapping
-    public ResponseEntity<List<User>> allUsers() {
-        List <User> users = userService.allUsers();
+    @GetMapping("/admin_list")
+    public ResponseEntity<List<AdminGeneralDto>> getALlAdmin() {
+        List <AdminGeneralDto> admins = userService.allUsers();
 
-        return ResponseEntity.ok(users);
+        return ResponseEntity.ok(admins);
     }
 }
