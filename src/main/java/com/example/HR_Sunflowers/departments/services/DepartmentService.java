@@ -31,6 +31,8 @@ public class DepartmentService {
             departmentGeneralDto.setName(department.getName());
 
             departmentGeneralDto.setDepartment_id(department.getDepartment_id());
+            departmentGeneralDto.setLocation(department.getLocation());
+            departmentGeneralDto.setNumberOfEmployee(department.getNumberOfEmployee());
 
 
 
@@ -81,12 +83,12 @@ public class DepartmentService {
         }
     }
 
-    public ResponseEntity<List<CreateDepartmentDto>> getDepartments() {
+    public ResponseEntity<List<DepartmentGeneralDto>> getDepartments() {
         List<Department> departments = departmentRepository.findAll();
-        List<CreateDepartmentDto> createDepartmentDtoList = departments.stream()
+        List<DepartmentGeneralDto> departmentGeneralDtoList = departments.stream()
                 .map(department -> {
-                    CreateDepartmentDto dto = new CreateDepartmentDto();
-
+                    DepartmentGeneralDto dto = new DepartmentGeneralDto();
+dto.setDepartment_id(department.getDepartment_id());
                     dto.setName(department.getName());
 
                     dto.setLocation(department.getLocation());
@@ -97,7 +99,7 @@ public class DepartmentService {
                     return dto;
                 })
                 .toList();
-        return ResponseEntity.ok(createDepartmentDtoList);
+        return ResponseEntity.ok(departmentGeneralDtoList);
     }
 
     public Long getDepartmentCount() {

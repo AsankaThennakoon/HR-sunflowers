@@ -34,7 +34,7 @@ public class DepartmentController {
 
 
     @GetMapping("/department")
-    public ResponseEntity<List<CreateDepartmentDto>> getEmployees() {
+    public ResponseEntity<List<DepartmentGeneralDto>> getEmployees() {
 
         return departmentService.getDepartments();
 

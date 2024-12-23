@@ -9,6 +9,7 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -83,6 +84,13 @@ public class JwtService {
         return extractClaim(token, Claims::getExpiration);
     }
 
+    private final Map<String,Boolean> tokenBlacklist=new ConcurrentHashMap<>();
 
+    public void invalidateToken(String token){
+        tokenBlacklist.put(token,true);
+    }
+    public boolean isTokenInvalid(String token){
+        return  tokenBlacklist.getOrDefault(token,false);
+    }
 
 }

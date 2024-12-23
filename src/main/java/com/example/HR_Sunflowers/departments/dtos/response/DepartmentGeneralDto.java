@@ -7,5 +7,7 @@ public class DepartmentGeneralDto {
 
     private Integer department_id;
     private String name;
+    private String location;
+    private Integer numberOfEmployee;
 
 }
