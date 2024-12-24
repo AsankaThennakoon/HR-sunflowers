@@ -28,8 +28,8 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @Value("${upload.directory}")
-    private String uploadDirectory;
+    @Value("${file.upload.dir}")
+    private String fileUploadDir;
 
 
     @GetMapping("/getEmployee/{id}")
@@ -64,16 +64,18 @@ public class EmployeeController {
 
             // Save the file
             String fileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
-            String directoryPath = new File("src/main/resources/static/images").getAbsolutePath();
-            File directory = new File(directoryPath);
-
+// Ensure the directory exists
+            File directory = new File(fileUploadDir);
             if (!directory.exists()) {
-                directory.mkdirs(); // Create the directory if it does not exist
+                directory.mkdirs();
             }
-            String filePath = directoryPath + File.separator + fileName;
-            File file = new File(filePath);
+
+            // Construct the full file path
+            File file = new File(directory, fileName);
+
+            // Save the file
             image.transferTo(file);
-            System.out.println("Saving file to: " + filePath);
+            System.out.println("Saving file to: " + file.getAbsolutePath());
 
             // Call the service with the uploaded file name
             return employeeService.addEmployee(createEmployeeDto, fileName);
@@ -104,15 +106,20 @@ public class EmployeeController {
             // If a new image is uploaded, handle the file upload
             if (image != null && !image.isEmpty()) {
                 String fileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
-                String directoryPath = new File("src/main/resources/static/images").getAbsolutePath();
-                File directory = new File(directoryPath);
+                // Save the file to the external directory
+                // Save the file to the external directory
+                // Ensure the directory exists
+                File directory = new File(fileUploadDir);
                 if (!directory.exists()) {
                     directory.mkdirs();
                 }
-                String filePath = directoryPath + File.separator + fileName;
-                File file = new File(filePath);
+
+                // Construct the full file path
+                File file = new File(directory, fileName);
+
+                // Save the file
                 image.transferTo(file);
-                System.out.println("Saving file to: " + filePath);
+                System.out.println("Saving file to: " + file.getAbsolutePath());
 
                 return employeeService.updateEmployee(id, updateEmployeeDto, fileName);
                 // Save the file name or path to the employee object
