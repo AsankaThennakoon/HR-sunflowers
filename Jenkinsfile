@@ -15,9 +15,8 @@ pipeline {
         stage('Build Application') {
             steps {
                 script {
-                    docker.image('openjdk:23-jdk-slim').inside {
-                        sh 'apt-get update && apt-get install -y maven'
-                        sh 'mvn clean package -DskipTests'
+                    docker.image('openjdk:23-jdk-slim').inside('-v /c/ProgramData/Jenkins:/workspace') {
+                        sh 'cd /workspace/.jenkins/workspace/sunflowers-backend && mvn clean package -DskipTests'
                     }
                 }
             }
