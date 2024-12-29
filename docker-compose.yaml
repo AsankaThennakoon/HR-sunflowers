@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: hr_sunflowers
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  springboot:
+    build:
+      context: .
+    container_name: springboot_container
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/hr_sunflowers
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+      FILE_UPLOAD_DIR: /opt/app/images
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./opt/app:/opt/app
+
+volumes:
+  mysql_data:
