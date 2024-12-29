@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    tools {
+        jdk "JDK 23"
+        maven "my-maven" // Use the 'my-maven' tool defined in your Global Tool Configuration
+    }
+
     environment {
         DOCKER_IMAGE = "tmat1560/hr-sunflowers-backend"
         DOCKER_CREDENTIALS_ID = "asanka-dockerhub"
@@ -14,12 +19,7 @@ pipeline {
         }
         stage('Build Application') {
             steps {
-                script {
-                    // Use absolute paths and make sure Docker can access them
-                    docker.image('openjdk:23-jdk-slim').inside("-v C:/ProgramData/Jenkins:/workspace") {
-                        bat 'cd C:/ProgramData/Jenkins/.jenkins/workspace/sunflowers-backend && mvn clean package -DskipTests'
-                    }
-                }
+                sh 'mvn clean package -DskipTests'
             }
         }
         stage('Build Docker Image') {
@@ -41,6 +41,7 @@ pipeline {
         stage('Deploy with Docker Compose') {
             steps {
                 script {
+                    // If on Linux, use sh instead of bat
                     bat 'docker-compose down'
                     bat 'docker-compose up -d'
                 }
