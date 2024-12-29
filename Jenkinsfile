@@ -6,7 +6,7 @@ pipeline {
         DOCKER_CREDENTIALS_ID = "asanka-dockerhub"
     }
     tools {
-        maven 'Maven' // Use the Maven installation configured in Jenkins
+        maven 'my-maven' // Use the Maven installation configured in Jenkins my-maven
     }
 
     stages {
