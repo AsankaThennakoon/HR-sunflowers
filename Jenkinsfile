@@ -5,9 +5,6 @@ pipeline {
         DOCKER_IMAGE = "tmat1560/hr-sunflowers-backend"
         DOCKER_CREDENTIALS_ID = "asanka-dockerhub"
     }
-    tools {
-        maven 'my-maven' // Use the Maven installation configured in Jenkins my-maven
-    }
 
     stages {
         stage('Clone Repository') {
@@ -17,7 +14,12 @@ pipeline {
         }
         stage('Build Application') {
             steps {
-                sh 'mvn clean package -DskipTests'
+                script {
+                    docker.image('openjdk:23-jdk-slim').inside {
+                        sh 'apt-get update && apt-get install -y maven'
+                        sh 'mvn clean package -DskipTests'
+                    }
+                }
             }
         }
         stage('Build Docker Image') {
