@@ -17,6 +17,12 @@ pipeline {
                 checkout scm
             }
         }
+         stage('Show java version') {
+            steps {
+                sh 'java -version' // Verify the installed JDK version
+                // ... your build steps here
+            }
+        }
         stage('Build Application') {
             steps {
                 sh 'mvn clean package -DskipTests'
