@@ -4,6 +4,7 @@ import com.example.HR_Sunflowers.auth.dtos.LoginUserDto;
 import com.example.HR_Sunflowers.auth.dtos.RegisterUserDto;
 import com.example.HR_Sunflowers.auth.entity.User;
 import com.example.HR_Sunflowers.auth.repositories.UserRepository;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class AuthenticationService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
