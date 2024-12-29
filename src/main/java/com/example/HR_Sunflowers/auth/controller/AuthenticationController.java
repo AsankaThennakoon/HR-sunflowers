@@ -6,13 +6,14 @@ import com.example.HR_Sunflowers.auth.entity.User;
 import com.example.HR_Sunflowers.auth.responses.LoginResponse;
 import com.example.HR_Sunflowers.auth.services.AuthenticationService;
 import com.example.HR_Sunflowers.auth.services.JwtService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/auth")
 @RestController
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class AuthenticationController {
     private final JwtService jwtService;
     private final AuthenticationService authenticationService;
