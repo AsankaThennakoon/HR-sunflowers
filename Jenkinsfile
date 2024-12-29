@@ -15,8 +15,9 @@ pipeline {
         stage('Build Application') {
             steps {
                 script {
-                    docker.image('openjdk:23-jdk-slim').inside('-v /c/ProgramData/Jenkins:/workspace') {
-                        sh 'cd /workspace/.jenkins/workspace/sunflowers-backend && mvn clean package -DskipTests'
+                    // Use absolute paths and make sure Docker can access them
+                    docker.image('openjdk:23-jdk-slim').inside("-v C:/ProgramData/Jenkins:/workspace") {
+                        bat 'cd C:/ProgramData/Jenkins/.jenkins/workspace/sunflowers-backend && mvn clean package -DskipTests'
                     }
                 }
             }
@@ -40,8 +41,8 @@ pipeline {
         stage('Deploy with Docker Compose') {
             steps {
                 script {
-                    sh 'docker-compose down'
-                    sh 'docker-compose up -d'
+                    bat 'docker-compose down'
+                    bat 'docker-compose up -d'
                 }
             }
         }
