@@ -5,6 +5,9 @@ pipeline {
         DOCKER_IMAGE = "tmat1560/hr-sunflowers-backend"
         DOCKER_CREDENTIALS_ID = "asanka-dockerhub"
     }
+    tools {
+        maven 'Maven' // Use the Maven installation configured in Jenkins
+    }
 
     stages {
         stage('Clone Repository') {
