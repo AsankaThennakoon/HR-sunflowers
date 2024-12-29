@@ -7,18 +7,23 @@ import com.example.HR_Sunflowers.auth.responses.LoginResponse;
 import com.example.HR_Sunflowers.auth.services.AuthenticationService;
 import com.example.HR_Sunflowers.auth.services.JwtService;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/auth")
 @RestController
-@AllArgsConstructor
 public class AuthenticationController {
+    
     private final JwtService jwtService;
     private final AuthenticationService authenticationService;
 
-
+   @Autowired
+    public AuthenticationController(JwtService jwtService, AuthenticationService authenticationService) {
+        this.jwtService = jwtService;
+        this.authenticationService = authenticationService;
+    }
     @PostMapping("/signup")
     public ResponseEntity<User> register(@RequestBody RegisterUserDto registerUserDto) {
         User registeredUser = authenticationService.signup(registerUserDto);
